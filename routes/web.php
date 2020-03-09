@@ -39,5 +39,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home','memberController@index')->name('home');
 
+Route::get('/loggedInMember','memberController@getLoggedInMemberDetails');
+
 Auth::routes();
+
 
