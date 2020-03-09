@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model as Model;
 /**
  * Class member
  * @package App\Models
- * @version February 3, 2020, 3:52 pm UTC
+ * @version March 9, 2020, 3:50 pm UTC
  *
+ * @property \App\Models\Membershiptype membertype
  * @property \Illuminate\Database\Eloquent\Collection bookings
  * @property string firstname
  * @property string surname
  * @property string membertype
  * @property string dateofbirth
+ * @property integer userid
  */
 class member extends Model
 {
@@ -30,7 +32,8 @@ class member extends Model
         'firstname',
         'surname',
         'membertype',
-        'dateofbirth'
+        'dateofbirth',
+        'userid'
     ];
 
     /**
@@ -43,7 +46,8 @@ class member extends Model
         'firstname' => 'string',
         'surname' => 'string',
         'membertype' => 'string',
-        'dateofbirth' => 'date'
+        'dateofbirth' => 'date',
+        'userid' => 'integer'
     ];
 
     /**
@@ -56,18 +60,18 @@ class member extends Model
     ];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function membertype()
+    {
+        return $this->belongsTo(\App\Models\Membershiptype::class, 'membertype');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function bookings()
     {
         return $this->hasMany(\App\Models\Booking::class, 'memberid');
     }
-	public function __toString()
-	{
-		return $this->firstname . " " . $this->surname;
-	}
-	public function user()
-{
-    return $this->belongsTo(\App\User::class,'userid','id');
-}
 }

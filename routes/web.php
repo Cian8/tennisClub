@@ -44,3 +44,6 @@ Route::get('/loggedInMember','memberController@getLoggedInMemberDetails');
 Auth::routes();
 
 
+
+
+Route::resource('membershiptypes', 'membershiptypeController');
